@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz Game By Shubham</title>
+	<link rel="stylesheet" type="text/css" href="style2.css">
+	<link rel="shortcut icon" href="favicon.ico">
+	<script type="text/javascript">
+		function showQuiz(){
+			document.getElementById('quiz').style.display = 'block';
+			document.getElementById('formDiv').style.display = 'none';
+			document.getElementById('myForm11').style.display = 'none';
+		}
+
+
+		function openForm(){
+			document.getElementById('formDiv').style.display = 'block';
+			document.getElementById('myForm11').style.display = 'block';
+			document.getElementById('quiz').style.display = 'none';
+		}
+	</script>
+</head>
+<body >
+<div  id="myImg">
+	<div align="center" style="padding: 20px;">
+		    <div class="logo" align="left">
+				<h2><strong >Shubham's Creation</strong></h2>
+			</div>
+	           <h1><strong>Quiz Game</strong></h1>
+    </div>
+	<!-- <header> -->
+	    <div class="main" >
+	  		
+			<ul>
+				<li><strong><a href="#" id="sam"><strong>Home</strong></a></strong></li>
+				<li><a href="#" onclick="openForm()"><strong>Log in/Register</strong></a></li>
+				<li><strong><a href="https://shubham26032000.github.io/cv/"><strong>Portfolio</strong></a></strong></li>
+				<li><strong><a href="feedbackform.html"><strong>Contacts</strong></a></strong></li>
+				<li><strong><a href="about.html"><strong>About</strong></a></strong></li>
+			</ul>
+		</div>
+       
+		<div class="start_quiz" id="hideone" >
+			<div style="display: none;"  id="quiz">
+			<h2 id="btnDiscription"><strong>Let's Start Quiz and See your Knowledge!</strong></h2>
+			<button  class="quiz_button difbutton" onclick="location.href = 'dbmsquiz.html';" id="myButton" >DBMS Quiz</button>
+			<button  class="quiz_button difbutton" onclick="location.href = 'osquiz.html';" id="myButton">OS Quiz</button>
+			<button  class="quiz_button difbutton" onclick="location.href = 'cnquiz.html';" id="myButton">CN Quiz</button>
+			<button  class="quiz_button difbutton" onclick="location.href = 'oopsquiz.html';" id="myButton">OOPS Quiz</button>
+			</div>
+			<div class="login-page" id="formDiv">
+				<div class="form" id="myForm11">
+					<form class="register-form"  onsubmit="showQuiz()">
+						<p style="color:deeppink;margin-bottom: 30px;font-size: 20px"><strong>Register</strong></p>
+						<input class="field" type="text" placeholder="User Name" required>
+						<input class="field" type="email" placeholder="E-mail"  required>
+						<input class="field" type="password" placeholder="Password"  required>
+						<button type="submit" >Register</button>
+						<p class="message">Already Registered ? <a href="#">Login</a></p>
+					</form>
+					<form class="login-form" onsubmit="showQuiz()">
+						<p style="color:deeppink;margin-bottom: 30px;font-size: 20px"><strong>Log in</strong></p>
+						<input class="field" type="text" placeholder="User Name"  required>
+						<input class="field" type="password" placeholder="Password"  required>
+						<button type="submit">Log in</button>
+						<p class="message">Not Registered ? <a href="#">Resister</a></p>
+					</form>
+			    </div>
+		    </div>
+	    </div>
+</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js">	
+		</script>
+		<script >
+			$('.message a').click( function(){
+				$('form').animate({height:"toggle",opacity:"toggle"}, "slow");
+			});
+		</script>
+	<!-- </header> -->
+</body>
+</html>

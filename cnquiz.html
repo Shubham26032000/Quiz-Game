@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz Application</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<link rel="shortcut icon"  href="favicon.ico">
+<script type="text/javascript">
+	var count=0, paper, paper_status,choice, choices,op1,op2,op3,op4,right=0,question;
+	var questions = [
+	{
+		question:"Which of these is a standard interface for serial data transmission?",
+		a:"ASCII",
+		b:"RS232C",
+		c:"2",
+		d:"Centronics",
+		answer:"B"
+	},
+	{
+		question:"Which type of topology is best suited for large businesses which must carefully control and coordinate the operation of distributed branch outlets?",
+		a:"Ring",
+		b:"Local area",
+		c:"Hierarchical",
+		d:"Star",
+		answer:"D"
+	},
+	{
+		question:"Which of the following transmission directions listed is not a legitimate channel?",
+		a:"Simplex",
+		b:"Half Duplex",
+		c:"Full Duplex",
+		d:"Double Duplex",
+		answer:"D"
+	},
+	{
+		question:"'Parity bits' are used for which of the following purposes?",
+		a:"Encryption of data",
+		b:"To transmit faster",
+		c:"To detect errors",
+		d:"To identify the user",
+		answer:"C"
+	},
+	{
+		question:"What kind of transmission medium is most appropriate to carry data in a computer network that is exposed to electrical interferences?",
+		a:"Unshielded twisted pair",
+		b:"Optical fiber",
+		c:"Coaxial cable",
+		d:"Microwave",
+		answer:"B"
+	},
+	{
+		question:" A collection of hyperlinked documents on the internet forms the ?.?",
+		a:"World Wide Web (WWW)",
+		b:"E-mail system",
+		c:"Mailing list",
+		d:"Hypertext markup language",
+		answer:"A"
+	},
+	{
+		question:"The location of a resource on the internet is given by its?",
+		a:"Protocol",
+		b:"URL",
+		c:"E-mail address",
+		d:"ICQ",
+		answer:"B"
+	},
+	{
+		question:"The term HTTP stands for?",
+		a:"Hyper terminal tracing program",
+		b:"Hypertext tracing protocol",
+		c:"Hypertext transfer protocol",
+		d:"Hypertext transfer program",
+		answer:"C"
+	},
+	{
+		question:"A proxy server is used as the computer?",
+		a:"with external access",
+		b:"acting as a backup",
+		c:"performing file handling",
+		d:"accessing user permissions",
+		answer:"A"
+	},
+	{
+		question:"Which one of the following would breach the integrity of a system?",
+		a:"Looking the room to prevent theft",
+		b:"Full access rights for all users",
+		c:"Fitting the system with an anti-theft device",
+		d:"Protecting the device against willful or accidental damage",
+		answer:"B"
+	}
+	];
+
+	function getId(id) {
+		return document.getElementById(id);
+	}
+
+	function getQuestion(){
+		paper = getId("paper");
+		if(count >= questions.length)
+		{
+			paper.innerHTML = "<h2>You got "+right+" of "+questions.length+" questions right</h2><br><button onclick='gotoHome()'>Return Home</button><br><br>";
+			getId("paper_status").innerHTML = "Your Test has been completed!";
+			count = 0;
+			right = 0;
+			return false;
+		}
+		if(count == questions.length-1){
+			getId("paper_status").innerHTML="Question "+(count+1)+" of "+questions.length;
+		    question = questions[count].question;
+		    op1 = questions[count].a;
+		    op2 = questions[count].b;
+		    op3 = questions[count].c;
+		    op4 = questions[count].d
+		    paper.innerHTML = "<h3>"+question+"</h3>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='A'>"+op1+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='B'>"+op2+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='C'>"+op3+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='D'>"+op4+"</label><br><br>";
+		    paper.innerHTML += '<button onclick="checkAnswer()">Submit</button>';
+		}else{
+			getId("paper_status").innerHTML="Question "+(count+1)+" of "+questions.length;
+		    question = questions[count].question;
+		    op1 = questions[count].a;
+		    op2 = questions[count].b;
+		    op3 = questions[count].c;
+		    op4 = questions[count].d
+		    paper.innerHTML = "<h3>"+question+"</h3>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='A'>"+op1+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='B'>"+op2+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='C'>"+op3+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='D'>"+op4+"</label><br><br>";
+		    paper.innerHTML += '<button onclick="checkAnswer()">Next</button>';
+		}
+	}
+	function gotoHome(){
+		location.href = "logInHome.html";
+	}
+    function startMyQuiz(){
+    	document.getElementById("instruction").style.display = "none";
+    	document.getElementById("pagebackground").style.display = "block";
+    }
+	function checkAnswer(){
+		choices = document.getElementsByName("choices");
+		for(var i=0;i<choices.length;i++)
+		{
+			if(choices[i].checked){
+				choice = choices[i].value;
+			}
+		}
+		if(choice == questions[count].answer){
+			right++;
+		}
+		count++;
+		getQuestion();
+	}
+	window.addEventListener("load",getQuestion);
+</script>
+</head>
+<body>
+<div id="instruction">
+	<h2>Quiz Instruction</h2>
+	<ul>
+		<li>There are 10 qustion in quiz</li>
+	    <li>After click next you will be to next question</li>
+	    <li>Once you click submit then can't retun to previous qustion</li>
+	    <li>Your result will be display at end of quiz</li>
+	    <li>Click on <strong>Start Quiz button</strong> to start quiz</li>
+	</ul>
+	<button id="myQuiz" onclick="startMyQuiz()">Start Quiz</button>
+</div>
+<div id="pagebackground"  class="myImage" style="display: none;">
+	<h1 id="header" style="color:#f6f500;text-shadow:6px -1px 11px #090909;">Computer Networks System Quiz</h1>
+	<div id="main_box">
+		<h1 id="paper_status"></h1>
+	 <div id="paper"></div>
+	</div>
+</div>
+	
+ 
+</body>
+</html>

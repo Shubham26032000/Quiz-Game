@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz Application</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<link rel="shortcut icon"  href="favicon.ico">
+<script type="text/javascript">
+	var count=0, paper, paper_status,choice, choices,op1,op2,op3,op4,right=0,question;
+	var questions = [
+	{
+		question:"A relational database consists of a collection of",
+		a:"Tables",
+		b:"Fields",
+		c:"Records",
+		d:"Keys",
+		answer:"A"
+	},
+	{
+		question:"Database __________ which is the logical design of the database, and the database _______ which is a snapshot of the data in the database at a given instant in time.",
+		a:"Instance, Schema",
+		b:"Relation, Schema",
+		c:"Relation, Domain",
+		d:"Schema, Instance",
+		answer: "D"
+	},
+	{
+		question:" A domain is atomic if elements of the domain are considered to be ____________ units.",
+		a:"Different",
+		b:"Indivisbile",
+		c:"Constant",
+		d:"Divisible",
+		answer:"B"
+	},
+	{
+		question:" Which one of the following is a set of one or more attributes taken collectively to uniquely identify a record?",
+		a:"Candidate key",
+		b:"Sub key",
+		c:"Super key",
+		d:"Foreign key",
+		answer:"C"
+	},
+	{
+		question:"The subset of a super key is a candidate key under what condition?",
+		a:"No proper subset is a super key",
+		b:"All subsets are super keys",
+		c:"Subset is a super key",
+		d:"Each subset is a super key",
+		answer:"A"
+	},
+	{
+		question:"The relation with the attribute which is the primary key is referenced in another relation. The relation which has the attribute as a primary key is called",
+		a:"Referential relation",
+		b:"Referencing relation",
+		c:"Referenced relation",
+		d:"Referred relation",
+		answer:"B"
+	},
+	{
+		question:"The ______ is the one in which the primary key of one relation is used as a normal attribute in another relation.",
+		a:"Referential relation",
+		b:"Referencing relation",
+		c:"Referenced relation",
+		d:"Referred relation",
+		answer:"C"
+	},
+	{
+		question:"Using which language can a user request information from a database?",
+		a:"Query",
+		b:"Relational",
+		c:"Structural",
+		d:"Compiler",
+		answer:"A"
+	},
+	{
+		question:"This Query can be replaced by which one of the following?<br>SELECT name, course_id<br>FROM instructor, teaches<br>WHERE instructor_ID= teaches_ID;",
+		a:"Select name,course_id from teaches,instructor where instructor_id=course_id;",
+		b:"Select name, course_id from instructor natural join teaches;",
+		c:"Select name, course_id from instructor;",
+		d:"Select course_id from instructor join teaches;",
+		answer:"B"
+	},
+	{
+		question:"Which of the following statements contains an error?",
+		a:"Select * from emp where empid = 10003;",
+		b:"Select empid from emp where empid = 10006;",
+		c:"Select empid from emp;",
+		d:"Select empid where empid = 1009 and lastname = ‘GELLER’;",
+		answer:"D"
+	}
+
+	];
+
+	function getId(id) {
+		return document.getElementById(id);
+	}
+
+	function getQuestion(){
+		paper = getId("paper");
+		if(count >= questions.length)
+		{
+			paper.innerHTML = "<h2>You got "+right+" of "+questions.length+" questions right</h2><br><button onclick='gotoHome()'>Return Home</button><br><br>";
+			getId("paper_status").innerHTML = "Your Test has been completed!";
+			count = 0;
+			right = 0;
+			return false;
+		}
+		if(count == questions.length-1){
+			getId("paper_status").innerHTML="Question "+(count+1)+" of "+questions.length;
+		    question = questions[count].question;
+		    op1 = questions[count].a;
+		    op2 = questions[count].b;
+		    op3 = questions[count].c;
+		    op4 = questions[count].d
+		    paper.innerHTML = "<h3>"+question+"</h3>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='A'>"+op1+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='B'>"+op2+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='C'>"+op3+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='D'>"+op4+"</label><br><br>";
+		    paper.innerHTML += '<button onclick="checkAnswer()">Submit</button>';
+		}else{
+			getId("paper_status").innerHTML="Question "+(count+1)+" of "+questions.length;
+		    question = questions[count].question;
+		    op1 = questions[count].a;
+		    op2 = questions[count].b;
+		    op3 = questions[count].c;
+		    op4 = questions[count].d
+		    paper.innerHTML = "<h3>"+question+"</h3>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='A'>"+op1+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='B'>"+op2+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='C'>"+op3+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='D'>"+op4+"</label><br><br>";
+		    paper.innerHTML += '<button onclick="checkAnswer()">Next</button>';
+		}
+		
+	}
+	function gotoHome(){
+		location.href = "logInHome.html";
+	}
+
+	function checkAnswer(){
+		choices = document.getElementsByName("choices");
+		for(var i=0;i<choices.length;i++)
+		{
+			if(choices[i].checked){
+				choice = choices[i].value;
+			}
+		}
+		if(choice == questions[count].answer){
+			right++;
+		}
+		count++;
+		getQuestion();
+	}
+	 function startMyQuiz(){
+    	document.getElementById("instruction").style.display = "none";
+    	document.getElementById("pagebackground").style.display = "block";
+    }
+	window.addEventListener("load",getQuestion);
+</script>
+</head>
+<body>
+	<div id="instruction">
+	<h2>Quiz Instruction</h2>
+	<ul>
+		<li>There are 10 qustion in quiz</li>
+	    <li>After click next you will be to next question</li>
+	    <li>Once you click submit then can't retun to previous qustion</li>
+	    <li>Your result will be display at end of quiz</li>
+	    <li>Click on <strong>Start Quiz button</strong> to start quiz</li>
+	</ul>
+	<button id="myQuiz" onclick="startMyQuiz()">Start Quiz</button>
+</div>
+<div id="pagebackground" style="display: none;">
+	<h1 id="header" style="color:#f6f500;text-shadow:6px -1px 11px #090909;">Database Management System Quiz</h1>
+	<div id="main_box">
+		<h1 id="paper_status"></h1>
+ 	<div id="paper"></div>
+</div>
+</div>
+ 
+</body>
+</html>

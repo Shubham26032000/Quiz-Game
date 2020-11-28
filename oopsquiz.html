@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz Application</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<link rel="shortcut icon"  href="favicon.ico">
+<script type="text/javascript">
+	var count=0, paper, paper_status,choice, choices,op1,op2,op3,op4,right=0,question;
+	var questions = [
+	{
+		question:"Which of the following is not a Java features?",
+		a:"DynamicArchitecture Neutral",
+		b:"Architecture Neutral",
+		c:"Use of pointers",
+		d:"Object-oriented",
+		answer:"C"
+	},
+	{
+		question:"The \u0021 article referred to as a",
+		a:"Unicode escape sequence",
+		b:"Octal escape",
+		c:"Hexadecimal",
+		d:"Line feed",
+		answer:""
+	},
+	{
+		question:"_____ is used to find and fix bugs in the Java programs.",
+		a:"JVM",
+		b:"JRE",
+		c:"JDK",
+		d:"JDB",
+		answer:"D"
+	},
+	{
+		question:"Which of the following is a valid long literal?",
+		a:"ABH8097",
+		b:"L990023",
+		c:"904423",
+		d:"0xnf029L",
+		answer:"D"
+	},
+	{
+		question:"In which process, a local variable has the same name as one of the instance variables?",
+		a:"Serialization",
+		b:"Variable Shadowing",
+		c:"Abstraction",
+		d:"Multi-threading",
+		answer:"B"
+	},
+	{
+		question:"Which of the following is not a Java features?",
+		a:"DynamicArchitecture Neutral",
+		b:"Architecture Neutral",
+		c:"Use of pointers",
+		d:"Object-oriented",
+		answer:"C"
+	},
+	{
+		question:"_____ is used to find and fix bugs in the Java programs.",
+		a:"JVM",
+		b:"JRE",
+		c:"JDK",
+		d:"JDB",
+		answer:"D"
+	},
+	{
+		question:"The \u0021 article referred to as a",
+		a:"Unicode escape sequence",
+		b:"Octal escape",
+		c:"Hexadecimal",
+		d:"Line feed",
+		answer:""
+	},
+	{
+		question:"_____ is used to find and fix bugs in the Java programs.",
+		a:"JVM",
+		b:"JRE",
+		c:"JDK",
+		d:"JDB",
+		answer:"D"
+	},
+	{
+		question:"Which of the following is a valid long literal?",
+		a:"ABH8097",
+		b:"L990023",
+		c:"904423",
+		d:"0xnf029L",
+		answer:"D"
+	}
+		
+	];
+
+	function getId(id) {
+		return document.getElementById(id);
+	}
+
+	function getQuestion(){
+		paper = getId("paper");
+		if(count >= questions.length)
+		{
+			paper.innerHTML = "<h2>You got "+right+" of "+questions.length+" questions right</h2><br><button onclick='gotoHome()'>Return Home</button><br><br>";
+			getId("paper_status").innerHTML = "Your Test has been completed!";
+			count = 0;
+			right = 0;
+			return false;
+		}
+		if(count == questions.length-1){
+			getId("paper_status").innerHTML="Question "+(count+1)+" of "+questions.length;
+		    question = questions[count].question;
+		    op1 = questions[count].a;
+		    op2 = questions[count].b;
+		    op3 = questions[count].c;
+		    op4 = questions[count].d
+		    paper.innerHTML = "<h3>"+question+"</h3>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='A'>"+op1+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='B'>"+op2+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='C'>"+op3+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='D'>"+op4+"</label><br><br>";
+		    paper.innerHTML += '<button onclick="checkAnswer()">Submit</button>';
+		}else{
+			getId("paper_status").innerHTML="Question "+(count+1)+" of "+questions.length;
+		    question = questions[count].question;
+		    op1 = questions[count].a;
+		    op2 = questions[count].b;
+		    op3 = questions[count].c;
+		    op4 = questions[count].d
+		    paper.innerHTML = "<h3>"+question+"</h3>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='A'>"+op1+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='B'>"+op2+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='C'>"+op3+"</label><br>";
+		    paper.innerHTML += "<label><input type='radio' name='choices' value='D'>"+op4+"</label><br><br>";
+		    paper.innerHTML += '<button onclick="checkAnswer()">Next</button>';
+		}
+	}
+
+	function gotoHome(){
+		location.href = "logInHome.html";
+		}
+
+	function checkAnswer(){
+		choices = document.getElementsByName("choices");
+		for(var i=0;i<choices.length;i++)
+		{
+			if(choices[i].checked){
+				choice = choices[i].value;
+			}
+		}
+		if(choice == questions[count].answer){
+			right++;
+		}
+		count++;
+		getQuestion();
+	}
+	 function startMyQuiz(){
+    	document.getElementById("instruction").style.display = "none";
+    	document.getElementById("pagebackground").style.display = "block";
+    }
+	window.addEventListener("load",getQuestion);
+</script>
+</head>
+<body>
+	<div id="instruction">
+	<h2>Quiz Instruction</h2>
+	<ul>
+		<li>There are 10 qustion in quiz</li>
+	    <li>After click next you will be to next question</li>
+	    <li>Once you click submit then can't retun to previous qustion</li>
+	    <li>Your result will be display at end of quiz</li>
+	    <li>Click on <strong>Start Quiz button</strong> to start quiz</li>
+	</ul>
+	<button id="myQuiz" onclick="startMyQuiz()">Start Quiz</button>
+</div>
+<div id="pagebackground" style="display: none;">
+	<h1 id="header" style="color:#f6f500;text-shadow:6px -1px 11px #090909;">Computer Networks System Quiz</h1>
+	<div id="main_box">
+		<h1 id="paper_status"></h1>
+	 <div id="paper"></div>
+	</div>
+</div>
+	
+ 
+</body>
+</html>
